@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.UserMapper">
+
+    <select id="selectUser" resultType="com.example.demo.entity.User">
+        select * from User
+    </select>
+
+    <insert id="addUser" parameterType="com.example.demo.entity.User">
+        insert into USER(name)  value(#{name})
+    </insert>
+
+    <update id="updateUser" parameterType="com.example.demo.entity.User">
+        update USER
+        <set>
+            <if test="id != null">
+                id = #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+
+    </update>
+
+    <delete id="deleteUser" >
+        delete from USER where id = #{id,jdbcType=INTEGER}
+    </delete>
+</mapper>
